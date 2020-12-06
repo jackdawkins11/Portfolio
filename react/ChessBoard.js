@@ -1,6 +1,6 @@
 
 import React from "react";
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 import Chessground from 'react-chessground'
 import 'react-chessground/dist/styles/chessground.css'
 import Chess from 'chess.js'
@@ -58,7 +58,6 @@ let moveList = [
     { from: "f6", to: "e4" },
     { from: "f3", to: "e4" },
     { from: "b7", to: "e4" },
-    { from: "g8", to: "h8" },
     { from: "d6", to: "h6" },
     { from: "e4", to: "f5" },
     { from: "e1", to: "e8" },
@@ -103,52 +102,139 @@ let moveList = [
 ]
 
 class ChessBoard extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
+        this.playMode = true
+        this.moveIdx = 0
         this.state = {
-            chess: new Chess(),
-            moveIdx: 0
+            chess: new Chess()
+        }
+        this.chessWrapperRef = React.createRef()
+    }
+
+    makeMoveOrReset() {
+        let chess = this.state.chess
+        if (this.moveIdx == moveList.length) {
+            this.setState({
+                chess: new Chess(),
+                lastMove: null
+            })
+            this.moveIdx = 0
+            return
+        }
+        let move = moveList[this.moveIdx]
+        chess.move(move)
+        this.setState({
+            chess: chess,
+            lastMove: [move.from, move.to]
+        })
+        this.moveIdx++
+    }
+
+    popMove() {
+        let chess = this.state.chess
+        if (this.moveIdx == 0) {
+            return
+        }
+        chess.undo()
+        this.setState({
+            chess: chess,
+            lastMove: null
+        })
+        this.moveIdx--
+    }
+
+    selectRight(){
+        this.playMode = false
+        this.makeMoveOrReset()
+    }
+
+    selectLeft(){
+        this.playMode = false
+        this.popMove()
+    }
+
+    handleKeyDown(e) {
+        e.preventDefault()
+        if (e.code === "ArrowRight") {
+            this.selectRight()
+        } else if (e.code === "ArrowLeft") {
+            this.selectLeft()
         }
     }
-    makeMoveOrReset(){
-      let chess = this.state.chess
-      let moveIdx = this.state.moveIdx
-      if( moveIdx == moveList.length ){
-          this.setState({
-              chess: new Chess(),
-              moveIdx: 0,
-              lastMove: null
-          })
-          return
-      }
-      let move = moveList[ moveIdx ]
-      chess.move( moveList[ moveIdx ] )
-      this.setState({
-          chess: chess,
-          moveIdx: moveIdx + 1,
-          lastMove: [ move.from, move.to ]
-      })
+
+    chessWrapperClick(e) {
+        console.log("Clicked")
+        this.chessWrapperRef.current.focus()
     }
-    tick(){
+
+    togglePaused() {
+        this.playMode = !this.playMode
+        if (this.playMode) {
+            this.tick()
+        }
+    }
+
+    tick() {
+        if (!this.playMode) {
+            return
+        }
         this.makeMoveOrReset()
-        setTimeout( this.tick.bind(this), 1000 )
+        setTimeout(this.tick.bind(this), 1000)
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.tick()
     }
-    getFen(){
+
+    getFen() {
         let fen = this.state.chess.fen()
         return fen
     }
-    render(){
-        let fen = this.getFen()
-        let lastMove = this.state.lastMove
-        console.log( this.state.moveIdx )
-        return <Chessground
-            fen={fen}
-            lastMove={lastMove}
-        />
+    render() {
+        let toggleIconUrl = null
+        if (this.playMode) {
+            toggleIconUrl = "img/pause.png"
+        } else {
+            toggleIconUrl = "img/play.png"
+        }
+        return <div onKeyDown={this.handleKeyDown.bind(this)} tabIndex="0"
+            onClick={this.chessWrapperClick.bind(this)}
+            ref={this.chessWrapperRef}
+            className="chessgroundWrapper">
+            <Chessground
+                fen={this.getFen()}
+                lastMove={this.state.lastMove}
+            />
+            <div style={{ display: "flex", justifyContent: "center", padding: "8px" }} >
+                <img src={toggleIconUrl}
+                    style={{
+                        width: "50px",
+                        height: "50px",
+                        marginRight: "5px",
+                        cursor: "pointer"
+                    }}
+                    onClick={this.togglePaused.bind(this)} />
+
+                <img src="img/left.png"
+                    style={{
+                        marginLeft: "5px",
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer"
+                    }}
+                    onClick={this.selectLeft.bind(this)} />
+
+                <img src="img/right.png"
+                    style={{
+                        width: "50px",
+                        height: "50px",
+                        cursor: "pointer"
+                    }}
+                    onClick={this.selectRight.bind(this)} />
+            </div>
+        </div >
     }
 }
 
-export {ChessBoard}
+export { ChessBoard }
