@@ -4,6 +4,10 @@ import React from 'react'
 
 function Menu(props) {
 
+    if( !props.visible ){
+        return <div />
+    }
+
     //the first div gets stretched to the bottom of the
     //page by the parent element
     //the inner div has position sticky 
@@ -27,7 +31,7 @@ function Menu(props) {
                 if (props.selected == elem.name) {
                     normStyle = Object.assign({}, normStyle, selectedStyle)
                 }
-                return <h2 onClick={(e) => props.menuClick(idx)}
+                return <h2 key={idx} onClick={(e) => props.menuClick(idx)}
                     style={normStyle}>{elem.name}</h2>
             })}
         </div>

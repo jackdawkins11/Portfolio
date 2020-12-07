@@ -111,9 +111,9 @@ class HomePage extends React.Component {
         })
     }
 
-    menuClick(idx){
+    menuClick(idx) {
         this.contentPanes[idx].ref.current
-            .scrollIntoView({behavior: "smooth", block: "center", inline: "end"})
+            .scrollIntoView({ behavior: "smooth", block: "center", inline: "end" })
     }
 
     render() {
@@ -124,33 +124,30 @@ class HomePage extends React.Component {
         } else {
             toggleSimulIconUrl = "img/play.png"
         }
-        //menu logic
-        let menubar = <Menu selected={this.state.currentPane}
-            contentPanes={this.contentPanes}
-            menuClick={this.menuClick.bind(this)}
-            />
-        if (this.state.displayMenu) {
-
-        } else {
-            menubar = <div></div>
-        }
         //the striped background
         let contentDivLighter = Object.assign({}, style.contentDiv, style.contentDivLighter)
         return <div style={{
             position: "absolute", top: "0", left: "0",
             width: "100%", display: "flex"
         }}>
-            {menubar}
+            <Menu selected={this.state.currentPane}
+                contentPanes={this.contentPanes}
+                menuClick={this.menuClick.bind(this)}
+                visible={this.state.displayMenu}
+            />
             <div style={style.flexColumn}>
                 <div style={{ position: "fixed", margin: "30px 0 0 30px" }}>
                     <img src="img/menuIcon.png"
-                        style={{ cursor: "pointer", width: "50px", height: "50px",
-                            marginRight: "30px" }}
+                        style={{
+                            cursor: "pointer", width: "50px", height: "50px",
+                            marginRight: "30px"
+                        }}
                         onClick={this.toggleMenu.bind(this)} />
                     <img src={toggleSimulIconUrl}
                         style={{
                             width: "50px",
-                            height: "50px"
+                            height: "50px",
+                            cursor: "pointer"
                         }}
                         onClick={this.props.toggleSimulationPaused} />
                 </div>
