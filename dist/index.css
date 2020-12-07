@@ -13,3 +13,7 @@ div div .files{
 .chessgroundWrapper:focus{
     outline: none;
 }
+
+.iconButton{
+    cursor: pointer;
+}

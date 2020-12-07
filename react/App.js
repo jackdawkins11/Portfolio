@@ -53,7 +53,7 @@ class App extends React.Component {
                         toggleSimulationPaused={this.toggleSimulationPaused.bind(this)}
                         simulNotPaused={!this.state.simul.paused} />
         }
-        return <div>
+        return <div style={{fontFamily: "sans-serif"}}>
             <BackgroundCanvas simul={this.state.simul} />
             {content}
         </div>

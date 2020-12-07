@@ -4,6 +4,7 @@ import { ChessBoard } from './ChessBoard'
 
 let style = {
     fullScreenFlexColumn: {
+        position: "absolute",
         top: 0,
         left: 0,
         width: "100%",
@@ -11,6 +12,7 @@ let style = {
         flexDirection: "column",
         padding: "30px",
         color: "#d9d9d9",
+        transition: "width 400ms ease-in-out",
     },
     contentDiv: {
         backgroundColor: "rgba(100, 100, 100, 0.5)",
@@ -35,6 +37,35 @@ function isScrolledIntoView(el) {
     // Partially visible elements return true:
     //let isVisible = elemTop < window.innerHeight && elemBottom >= 0;
     return isVisible;
+}
+
+function getPixelsInView(el){
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top;
+    var elemBottom = rect.bottom;
+
+    //case 1: completely visible
+    if( elemTop >= 0 && elemBottom <= window.innerHeight ){
+        return elemBottom - elemTop
+    }else if( elemTop < 0 && elemBottom <= window.innerHeight ){
+        //case 2: bottom part visible
+        return elemBottom
+    }else if( elemTop >= 0 && elemBottom > window.innerHeight ){
+        return window.innerWidth - elemTop
+    }
+}
+
+function maxIdx( arr ){
+    if( arr.length == 0){
+        return -1
+    }
+    let idx = 0
+    for(let i= 1; i < arr.length; i++){
+        if( arr[i] > arr[idx] ){
+            idx = i
+        }
+    }
+    return idx
 }
 
 function Table(props) {
@@ -99,10 +130,18 @@ class HomePage extends React.Component {
 
     constructor(props) {
         super(props)
-        this.graph1Ref = React.createRef()
-        this.graph2Ref = React.createRef()
+        /*
+            We use these to track where on the website the user is
+        */
+        this.contentPanes = [
+            { name: "Welcome", ref: React.createRef() },
+            { name: "Overview", ref: React.createRef() },
+            { name: "Languages", ref: React.createRef() },
+            { name: "Project showcase", ref: React.createRef() },
+            { name: "Contact", ref: React.createRef() },
+        ]
         this.state = {
-            displayGraphs1: false,
+            currentPane: this.contentPanes[0].name
         }
     }
 
@@ -115,11 +154,24 @@ class HomePage extends React.Component {
     }
 
     handleScroll() {
-        if (isScrolledIntoView(this.graph1Ref.current)) {
-            this.setState({
-                displayGraphs1: true
-            })
+        this.setState({
+            currentPane: this.findCurrentPane()
+        })
+    }
+
+    findCurrentPane(){
+        let pixelsInView = []
+        for( let elem of this.contentPanes ){
+            pixelsInView.push( getPixelsInView(elem.ref.current) )
         }
+        let idx = maxIdx( pixelsInView )
+        return this.contentPanes[ idx ].name
+    }
+
+    toggleMenu(e){
+        this.setState({
+            displayMenu: !this.state.displayMenu
+        })
     }
 
     render() {
@@ -129,91 +181,156 @@ class HomePage extends React.Component {
         } else {
             toggleSimulIconUrl = "img/play.png"
         }
-        return <div style={style.fullScreenFlexColumn}>
-            <img src={toggleSimulIconUrl}
-                style={{
-                    position: "fixed",
-                    margin: "30px 0 0 30px",
-                    width: "50px",
-                    height: "50px"
-                }}
-                onClick={this.props.toggleSimulationPaused} />
-            <div style={style.contentDiv}>
-                <div style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    width: "500px"
-                }}>
-                    <div >
-                        <h1 >Hi.</h1><h2>I'm Jack Dawkins.</h2>
-                    </div>
-                    <img style={{ height: "200px" }}
-                        src="img/20-Scientific_Study-512.png" />
-                </div>
+        let shouldExpandGraphs = this.state.currentPane == "Languages"
+        let menubar = (
+            <div style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "25%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "black"
+            }}>
+                {this.contentPanes.map( elem => {
+                    let selected = elem.name == this.state.currentPane
+                    let selectedStyle = {
+                        color: "white",
+                        fontSize: "35px"
+                    }
+                    let normStyle = {
+                        padding: "5px",
+                        color: "#d9d9d9"
+                    }
+                    if( selected ){
+                        normStyle = Object.assign( {}, normStyle, selectedStyle )
+                    }
+                    return <h2 style={normStyle}>{elem.name}</h2>
+                } )}
             </div>
-            <div style={
-                Object.assign({}, style.contentDiv, style.contentDivLighter)} >
-                <div style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center"
-                }}>
-                    <p style={{ width: "500px", fontSize: "23px" }}>I am a recent graduate of Hamline Univetsity (November 2020),
-                    with a Computer Science Major and Mathematics Minor. I am knowledgeable
-                    of important computer science topics, including Artificial
-                    Intelligence methods such as deep neural networks. I also have experience in
-                        multiple programming languages and frameworks.</p>
+        )
+        let fullScreenFlexColumnStyle = style.fullScreenFlexColumn 
+        if( this.state.displayMenu ){
+            fullScreenFlexColumnStyle = Object.assign( {}, fullScreenFlexColumnStyle,
+                {left: "25%", width: "75%"} )
+        }else{
+            menubar = <div></div>
+        }
+        return <div>
+            {menubar}
+            <div style={fullScreenFlexColumnStyle}>
+                <img src={toggleSimulIconUrl}
+                    style={{
+                        position: "fixed",
+                        margin: "30px 0 0 30px",
+                        width: "50px",
+                        height: "50px"
+                    }}
+                    onClick={this.props.toggleSimulationPaused} />
+                <button onClick={this.toggleMenu.bind(this)}>Menu</button>
+                <div style={style.contentDiv} ref={this.contentPanes[0].ref} >
                     <div style={{
                         display: "flex",
-                        flexDirection: "column"
+                        justifyContent: "space-around",
+                        width: "100%"
                     }}>
-                        <div style={{ display: "flex" }}>
-                            <img style={{ height: "100px" }} src="img/binary-file.png" />
-                            <img style={{ height: "100px" }} src="img/Icon_Function.png" />
+                        <div >
+                            <h1 style={{ fontSize: "35px" }}>Hi.</h1>
+                            <h2 style={{ fontSize: "35px" }} >I'm Jack Dawkins.</h2>
                         </div>
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <img style={{ height: "100px" }} src="img/dnn-28vmlum.png" />
-                        </div>
+                        <img style={{ height: "300px" }}
+                            src="img/20-Scientific_Study-512.png" />
                     </div>
                 </div>
-            </div>
-            <div style={style.contentDiv} >
-                <div style={{
-                    marginTop: "50px",
-                    display: "flex", justifyContent: "center", alignItems: "center"
-                }}
-                    ref={this.graph1Ref} >
-                    <Table caption="Programming languages"
-                        expand={this.state.displayGraphs1} body={languages1} />
-                    <Table caption="Frameworks and servers"
-                        expand={this.state.displayGraphs1} body={languages2} />
+                <div style={
+                    Object.assign({}, style.contentDiv, style.contentDivLighter)}
+                    ref={this.contentPanes[1].ref}
+                    >
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%"
+                    }}>
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "column"
+                        }}>
+                            <div style={{ display: "flex" }}>
+                                <img style={{ height: "150px", margin: "20px" }} src="img/binary-file.png" />
+                                <img style={{ height: "150px", margin: "20px" }} src="img/Icon_Function.png" />
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                <img style={{ height: "150px", margin: "20px" }} src="img/dnn-28vmlum.png" />
+                            </div>
+                        </div>
+                        <p style={{ width: "550px", fontSize: "30px" }}>I am a recent graduate of Hamline Univetsity (November 2020),
+                        with a Computer Science Major and Mathematics Minor. I am knowledgeable
+                        of important computer science topics, including Artificial
+                        Intelligence methods such as deep neural networks. I also have experience in
+                        multiple programming languages and frameworks.</p>
+                    </div>
                 </div>
-                <p style={{ margin: "50px 50px", fontSize: "23px" }}>
-                    I base my strength on experience, which at the moment is just personal projects,
-                    and my understanding of the features of the language and related tools.
-                </p>
-            </div>
-            <div style={style.contentDiv} >
-                <div style={{
-                    display: "flex", justifyContent: "space-around",
-                    alignItems: "center", width: "100%", padding: "25px"
-                }}>
-                    <div>
-                        <h2>Project showcase: Artificial Intelligence </h2>
-                        <p style={{ width: "600px", fontSize: "25px" }}>I trained a deep convolutional neural network to
-                        output how good a chess position is and a probability
-                        distribution across the move list. I used this
-                        neural network in conjunction with Monte Carlo Tree Search
-                        to create a chess program that could play as good as top
-                        humans. Check out the details 
-                        <a style={{marginLeft: "10px"}} href="https://github.com/jackdawkins11/pytorch-alpha-zero">here</a>.
+                <div style={style.contentDiv} ref={this.contentPanes[2].ref} >
+                    <div ref={this.graph1Ref} style={{ display: "flex" }}>
+                        <Table caption="Programming languages"
+                            expand={shouldExpandGraphs} body={languages1} />
+                        <Table caption="Frameworks and servers"
+                            expand={shouldExpandGraphs} body={languages2} />
+                    </div>
+                </div>
+                <div style={Object.assign({}, style.contentDiv, style.contentDivLighter)}
+                 ref={this.contentPanes[3].ref} >
+                    <div style={{
+                        display: "flex", justifyContent: "space-around",
+                        alignItems: "center", width: "100%", padding: "25px"
+                    }}>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <h2>Project showcase: Artificial Intelligence </h2>
+                            <p style={{ width: "600px", fontSize: "25px" }}>I trained a deep convolutional neural network to
+                            output how good a chess position is and a probability
+                            distribution across the move list. I used this
+                            neural network in conjunction with Monte Carlo Tree Search
+                            to create a chess program that could play as good as top
+                            humans. Check out the details
+                        <a style={{ textDecoration: "none", color: "#007bff" }} href="https://github.com/jackdawkins11/pytorch-alpha-zero"> here</a>.
                         To the right is a game it played against itself.
-                    </p>
+                        </p>
+                        </div>
+                        <ChessBoard width="500px" height="500px" />
                     </div>
-                    <ChessBoard width="500px" height="500px" />
+                </div>
+                <div style={style.contentDiv} ref={this.contentPanes[4].ref} >
+                    <div style={{ display: "flex", justifyContent: "space-around" }}>
+                        <div >
+                            <h3 style={{ fontSize: "25px" }}> Email </h3>
+                            <h2 style={{ fontSize: "27px" }} > jackdawkins1974@gmail.com </h2>
+                        </div>
+                        <div style={{ margin: "0 50px 0 100px" }}>
+                            <h3 style={{ fontSize: "25px" }} > Phone </h3>
+                            <h2 style={{ fontSize: "27px" }} > 651 592 1368 </h2>
+                        </div>
+                        <div style={{ margin: "0 100px 0 50px" }} >
+                            <h3 style={{ fontSize: "25px" }} > Location </h3>
+                            <h2 style={{ fontSize: "27px" }} > St. Paul, MN, USA </h2>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: "25px" }} > Social media </h3>
+                            <div>
+                                <a href="https://github.com/jackdawkins11">
+                                    <img className="iconButton" style={{ width: "50px" }} src="img/linkedin.png" />
+                                </a>
+                                <a href="https://www.linkedin.com/in/john-dawkins-0b798b19a/">
+                                    <img className="iconButton" style={{ width: "50px" }} src="img/github.png" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     }
 }
 
