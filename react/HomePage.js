@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {ChessBoard} from './ChessBoard'
+import { ChessBoard } from './ChessBoard'
 
 let style = {
     fullScreenFlexColumn: {
@@ -41,12 +41,12 @@ function Table(props) {
     let body = props.body.map((val, i) => {
         let percent = val.val * 100
         let str = percent + "%"
-        if(!props.expand){
+        if (!props.expand) {
             percent = 0
             str = ""
         }
         return <tr key={i}>
-            <td style={{fontSize: "20px", padding: "2px"}}>
+            <td style={{ fontSize: "20px", padding: "2px" }}>
                 {val.name}
             </td>
             <td style={{ padding: "1px", width: "300px" }}>
@@ -63,8 +63,8 @@ function Table(props) {
             </td>
         </tr>
     })
-    return <table style={{color: "inherit"}}>
-        <caption style={{fontSize: "25px", marginBottom: "20px"}}>{props.caption}</caption>
+    return <table style={{ color: "inherit" }}>
+        <caption style={{ fontSize: "25px", marginBottom: "20px" }}>{props.caption}</caption>
         <tbody>
             {body}
         </tbody>
@@ -178,21 +178,40 @@ class HomePage extends React.Component {
                 </div>
             </div>
             <div style={style.contentDiv} >
-                <div style={{ marginTop: "50px",
-                    display: "flex", justifyContent: "center", alignItems: "center" }}
+                <div style={{
+                    marginTop: "50px",
+                    display: "flex", justifyContent: "center", alignItems: "center"
+                }}
                     ref={this.graph1Ref} >
                     <Table caption="Programming languages"
                         expand={this.state.displayGraphs1} body={languages1} />
                     <Table caption="Frameworks and servers"
                         expand={this.state.displayGraphs1} body={languages2} />
                 </div>
-                <p style={{margin: "50px 50px", fontSize: "23px"}}>
+                <p style={{ margin: "50px 50px", fontSize: "23px" }}>
                     I base my strength on experience, which at the moment is just personal projects,
                     and my understanding of the features of the language and related tools.
                 </p>
             </div>
             <div style={style.contentDiv} >
-                <ChessBoard />
+                <div style={{
+                    display: "flex", justifyContent: "space-around",
+                    alignItems: "center", width: "100%", padding: "25px"
+                }}>
+                    <div>
+                        <h2>Project showcase: Artificial Intelligence </h2>
+                        <p style={{ width: "600px", fontSize: "25px" }}>I trained a deep convolutional neural network to
+                        output how good a chess position is and a probability
+                        distribution across the move list. I used this
+                        neural network in conjunction with Monte Carlo Tree Search
+                        to create a chess program that could play as good as top
+                        humans. Check out the details 
+                        <a style={{marginLeft: "10px"}} href="https://github.com/jackdawkins11/pytorch-alpha-zero">here</a>.
+                        To the right is a game it played against itself.
+                    </p>
+                    </div>
+                    <ChessBoard width="500px" height="500px" />
+                </div>
             </div>
         </div>
     }

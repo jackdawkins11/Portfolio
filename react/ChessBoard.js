@@ -205,6 +205,8 @@ class ChessBoard extends React.Component {
             <Chessground
                 fen={this.getFen()}
                 lastMove={this.state.lastMove}
+                width={this.props.width}
+                height={this.props.height}
             />
             <div style={{ display: "flex", justifyContent: "center", padding: "8px" }} >
                 <img src={toggleIconUrl}
