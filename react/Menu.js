@@ -4,31 +4,34 @@ import React from 'react'
 
 function Menu(props) {
 
-    return <div style={{
-        position: "fixed",
+    //the first div gets stretched to the bottom of the
+    //page by the parent element
+    //the inner div has position sticky 
+    return <div style={{backgroundColor: "black", opacity: "0.75"}}>
+        <div style={{
+        width: "300px", 
         top: 0,
-        left: 0,
-        width: "25%",
-        height: "100%",
+        position: "sticky",
         display: "flex",
-        flexDirection: "column",
-        backgroundColor: "black"
-    }}>
-        {props.contentPanes.map(elem => {
-            let selectedStyle = {
-                color: "white",
-                fontSize: "35px"
-            }
-            let normStyle = {
-                padding: "5px",
-                color: "#d9d9d9"
-            }
-            if (props.selected == elem.name ) {
-                normStyle = Object.assign({}, normStyle, selectedStyle)
-            }
-            return <h2 style={normStyle}>{elem.name}</h2>
-        })}
+        flexDirection: "column"}}>
+            {props.contentPanes.map( (elem, idx) => {
+                let selectedStyle = {
+                    color: "white",
+                    fontSize: "35px"
+                }
+                let normStyle = {
+                    padding: "5px",
+                    color: "#d9d9d9",
+                    cursor: "pointer"
+                }
+                if (props.selected == elem.name) {
+                    normStyle = Object.assign({}, normStyle, selectedStyle)
+                }
+                return <h2 onClick={(e) => props.menuClick(idx)}
+                    style={normStyle}>{elem.name}</h2>
+            })}
+        </div>
     </div>
 }
 
-export {Menu}
+export { Menu }

@@ -5,14 +5,11 @@ import { Languages } from './Languages'
 import { Menu } from './Menu'
 import { Overview } from './Overview'
 import { ProjectShowcase } from './ProjectShowcase'
-import {Welcome} from './Welcome'
+import { Welcome } from './Welcome'
 
 let style = {
-    fullScreenFlexColumn: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
+    flexColumn: {
+        flexGrow: 1,
         display: "flex",
         flexDirection: "column",
         padding: "30px",
@@ -32,18 +29,18 @@ let style = {
     },
 }
 
-function getPixelsInView(el){
+function getPixelsInView(el) {
     var rect = el.getBoundingClientRect();
     var elemTop = rect.top;
     var elemBottom = rect.bottom;
 
     //case 1: completely visible
-    if( elemTop >= 0 && elemBottom <= window.innerHeight ){
+    if (elemTop >= 0 && elemBottom <= window.innerHeight) {
         return elemBottom - elemTop
-    }else if( elemTop < 0 && elemBottom <= window.innerHeight ){
+    } else if (elemTop < 0 && elemBottom <= window.innerHeight) {
         //case 2: bottom part visible
         return elemBottom
-    }else if( elemTop >= 0 && elemBottom > window.innerHeight ){
+    } else if (elemTop >= 0 && elemBottom > window.innerHeight) {
         //case 3: top part visible
         return window.innerHeight - elemTop
     }
@@ -51,13 +48,13 @@ function getPixelsInView(el){
 }
 
 //return index of elem from array which is greatest
-function maxIdx( arr ){
-    if( arr.length == 0){
+function maxIdx(arr) {
+    if (arr.length == 0) {
         return -1
     }
     let idx = 0
-    for(let i= 1; i < arr.length; i++){
-        if( arr[i] > arr[idx] ){
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > arr[idx]) {
             idx = i
         }
     }
@@ -99,19 +96,24 @@ class HomePage extends React.Component {
         })
     }
 
-    findCurrentPane(){
+    findCurrentPane() {
         let pixelsInView = []
-        for( let elem of this.contentPanes ){
-            pixelsInView.push( getPixelsInView(elem.ref.current) )
+        for (let elem of this.contentPanes) {
+            pixelsInView.push(getPixelsInView(elem.ref.current))
         }
-        let idx = maxIdx( pixelsInView )
-        return this.contentPanes[ idx ].name
+        let idx = maxIdx(pixelsInView)
+        return this.contentPanes[idx].name
     }
 
-    toggleMenu(e){
+    toggleMenu(e) {
         this.setState({
             displayMenu: !this.state.displayMenu
         })
+    }
+
+    menuClick(idx){
+        this.contentPanes[idx].ref.current
+            .scrollIntoView({behavior: "smooth", block: "center", inline: "end"})
     }
 
     render() {
@@ -123,28 +125,35 @@ class HomePage extends React.Component {
             toggleSimulIconUrl = "img/play.png"
         }
         //menu logic
-        let menubar = <Menu selected={this.state.currentPane} contentPanes={this.contentPanes} />
-        let fullScreenFlexColumnStyle = style.fullScreenFlexColumn 
-        if( this.state.displayMenu ){
-            fullScreenFlexColumnStyle = Object.assign( {}, fullScreenFlexColumnStyle,
-                {left: "25%", width: "75%"} )
-        }else{
+        let menubar = <Menu selected={this.state.currentPane}
+            contentPanes={this.contentPanes}
+            menuClick={this.menuClick.bind(this)}
+            />
+        if (this.state.displayMenu) {
+
+        } else {
             menubar = <div></div>
         }
         //the striped background
         let contentDivLighter = Object.assign({}, style.contentDiv, style.contentDivLighter)
-        return <div>
+        return <div style={{
+            position: "absolute", top: "0", left: "0",
+            width: "100%", display: "flex"
+        }}>
             {menubar}
-            <div style={fullScreenFlexColumnStyle}>
-                <img src={toggleSimulIconUrl}
-                    style={{
-                        position: "fixed",
-                        margin: "30px 0 0 30px",
-                        width: "50px",
-                        height: "50px"
-                    }}
-                    onClick={this.props.toggleSimulationPaused} />
-                <button onClick={this.toggleMenu.bind(this)}>Menu</button>
+            <div style={style.flexColumn}>
+                <div style={{ position: "fixed", margin: "30px 0 0 30px" }}>
+                    <img src="img/menuIcon.png"
+                        style={{ cursor: "pointer", width: "50px", height: "50px",
+                            marginRight: "30px" }}
+                        onClick={this.toggleMenu.bind(this)} />
+                    <img src={toggleSimulIconUrl}
+                        style={{
+                            width: "50px",
+                            height: "50px"
+                        }}
+                        onClick={this.props.toggleSimulationPaused} />
+                </div>
                 <div style={style.contentDiv} ref={this.contentPanes[0].ref} >
                     <Welcome />
                 </div>
