@@ -6,6 +6,7 @@ import { Menu } from './Menu'
 import { Overview } from './Overview'
 import { ProjectShowcase } from './ProjectShowcase'
 import { Welcome } from './Welcome'
+import {Buttons} from './Buttons'
 
 let style = {
     flexColumn: {
@@ -106,8 +107,15 @@ class HomePage extends React.Component {
     }
 
     toggleMenu(e) {
+        e.preventDefault()
         this.setState({
             displayMenu: !this.state.displayMenu
+        })
+    }
+
+    closeMenu(e) {
+        this.setState({
+            displayMenu: false
         })
     }
 
@@ -124,6 +132,15 @@ class HomePage extends React.Component {
         } else {
             toggleSimulIconUrl = "img/play.png"
         }
+        //Only add the close menu event listener when the menu is open
+        let closeMenuListener = this.closeMenu.bind(this)
+        if( !this.state.displayMenu ){
+            closeMenuListener = (e) => {return }
+        }
+        let size = "BIG"
+        if( this.state.displayMenu ){
+            size = "SMALL"
+        }
         //the striped background
         let contentDivLighter = Object.assign({}, style.contentDiv, style.contentDivLighter)
         return <div style={{
@@ -135,36 +152,27 @@ class HomePage extends React.Component {
                 menuClick={this.menuClick.bind(this)}
                 visible={this.state.displayMenu}
             />
-            <div style={style.flexColumn}>
-                <div style={{ position: "fixed", margin: "30px 0 0 30px" }}>
-                    <img src="img/menuIcon.png"
-                        style={{
-                            cursor: "pointer", width: "50px", height: "50px",
-                            marginRight: "30px"
-                        }}
-                        onClick={this.toggleMenu.bind(this)} />
-                    <img src={toggleSimulIconUrl}
-                        style={{
-                            width: "50px",
-                            height: "50px",
-                            cursor: "pointer"
-                        }}
-                        onClick={this.props.toggleSimulationPaused} />
-                </div>
+            <div style={style.flexColumn} onClick={closeMenuListener} >
+                <Buttons visible={!this.state.displayMenu}
+                    toggleSimulIconUrl={toggleSimulIconUrl}
+                    toggleMenu={this.toggleMenu.bind(this)}
+                    toggleSimulationPaused={this.props.toggleSimulationPaused}
+                />
+                
                 <div style={style.contentDiv} ref={this.contentPanes[0].ref} >
                     <Welcome />
                 </div>
                 <div style={contentDivLighter} ref={this.contentPanes[1].ref} >
-                    <Overview />
+                    <Overview size={size} />
                 </div>
                 <div style={style.contentDiv} ref={this.contentPanes[2].ref} >
                     <Languages displayGraphs={this.state.currentPane == "Languages"} />
                 </div>
                 <div style={contentDivLighter} ref={this.contentPanes[3].ref} >
-                    <ProjectShowcase />
+                    <ProjectShowcase size={size} />
                 </div>
                 <div style={style.contentDiv} ref={this.contentPanes[4].ref} >
-                    <Contact />
+                    <Contact size={size} />
                 </div>
             </div>
         </div>

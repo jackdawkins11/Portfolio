@@ -3,9 +3,10 @@ import React from 'react'
 
 
 function Menu(props) {
-
-    if( !props.visible ){
-        return <div />
+    
+    let width = "300px"
+    if (!props.visible ){
+        width = "0"
     }
 
     //the first div gets stretched to the bottom of the
@@ -13,12 +14,17 @@ function Menu(props) {
     //the inner div has position sticky 
     return <div style={{backgroundColor: "black", opacity: "0.75"}}>
         <div style={{
-        width: "300px", 
+        width: width, 
         top: 0,
         position: "sticky",
         display: "flex",
-        flexDirection: "column"}}>
+        flexDirection: "column",
+        transition: "all 500ms ease-in-out"
+        }}>
             {props.contentPanes.map( (elem, idx) => {
+                if( !props.visible ){
+                    return <span />
+                }
                 let selectedStyle = {
                     color: "white",
                     fontSize: "35px"

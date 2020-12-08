@@ -1,15 +1,40 @@
 import React from 'react'
 import { ChessBoard } from './ChessBoard'
 
+let sizes = {
+    BIG: {
+        "pWidth": "600px",
+        "pFontSize": "25px",
+        "hFontSize": "28px",
+        "chessWidth": "500px"
+    },
+    MED: {
+        "pWidth": "420px",
+        "pFontSize": "20px",
+        "hFontSize": "22px",
+        "chessWidth": "400px"
+    },
+    SMALL: {
+        "pWidth": "450px",
+        "pFontSize": "21px",
+        "hFontSize": "23px",
+        "chessWidth": "250px"
+    }
+}
+
 function ProjectShowcase(props) {
+
+    let pStyle = { width: sizes[ props.size ].pWidth, fontSize: sizes[props.size].pFontSize }
+    let hStyle = { fontSize: sizes[ props.size ].hFontSize }
+    let chessWidth = sizes[ props.size ].chessWidth
 
     return <div style={{
         display: "flex", justifyContent: "space-around",
         alignItems: "center", width: "100%", padding: "25px"
     }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h2>Project showcase: Artificial Intelligence </h2>
-            <p style={{ width: "600px", fontSize: "25px" }}>I trained a deep convolutional neural network to
+            <h2 style={hStyle}>Project showcase: Artificial Intelligence </h2>
+            <p style={pStyle}>I trained a deep convolutional neural network to
             output how good a chess position is and a probability
             distribution across the move list. I used this
             neural network in conjunction with Monte Carlo Tree Search
@@ -19,7 +44,7 @@ function ProjectShowcase(props) {
                         To the right is a game it played against itself.
                         </p>
         </div>
-        <ChessBoard width="500px" height="500px" />
+        <ChessBoard width={chessWidth} height={chessWidth} />
     </div>
 }
 
