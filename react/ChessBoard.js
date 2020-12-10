@@ -4,7 +4,621 @@ import Chessground from 'react-chessground'
 import 'react-chessground/dist/styles/chessground.css'
 import Chess from 'chess.js'
 
-
+let moveList = [
+    {
+        "from": "d2",
+        "to": "d4"
+    },
+    {
+        "from": "d7",
+        "to": "d5"
+    },
+    {
+        "from": "c2",
+        "to": "c4"
+    },
+    {
+        "from": "e7",
+        "to": "e6"
+    },
+    {
+        "from": "b1",
+        "to": "c3"
+    },
+    {
+        "from": "f8",
+        "to": "b4"
+    },
+    {
+        "from": "e2",
+        "to": "e3"
+    },
+    {
+        "from": "g8",
+        "to": "f6"
+    },
+    {
+        "from": "g1",
+        "to": "f3"
+    },
+    {
+        "from": "e8",
+        "to": "g8"
+    },
+    {
+        "from": "f1",
+        "to": "d3"
+    },
+    {
+        "from": "c7",
+        "to": "c5"
+    },
+    {
+        "from": "e1",
+        "to": "g1"
+    },
+    {
+        "from": "b8",
+        "to": "c6"
+    },
+    {
+        "from": "d4",
+        "to": "c5"
+    },
+    {
+        "from": "d5",
+        "to": "c4"
+    },
+    {
+        "from": "d3",
+        "to": "c4"
+    },
+    {
+        "from": "b4",
+        "to": "c5"
+    },
+    {
+        "from": "d1",
+        "to": "c2"
+    },
+    {
+        "from": "b7",
+        "to": "b6"
+    },
+    {
+        "from": "b2",
+        "to": "b3"
+    },
+    {
+        "from": "c8",
+        "to": "b7"
+    },
+    {
+        "from": "c1",
+        "to": "b2"
+    },
+    {
+        "from": "c6",
+        "to": "b4"
+    },
+    {
+        "from": "c2",
+        "to": "e2"
+    },
+    {
+        "from": "a8",
+        "to": "c8"
+    },
+    {
+        "from": "f1",
+        "to": "d1"
+    },
+    {
+        "from": "d8",
+        "to": "e7"
+    },
+    {
+        "from": "a2",
+        "to": "a3"
+    },
+    {
+        "from": "b4",
+        "to": "d5"
+    },
+    {
+        "from": "c3",
+        "to": "d5"
+    },
+    {
+        "from": "f6",
+        "to": "d5"
+    },
+    {
+        "from": "b3",
+        "to": "b4"
+    },
+    {
+        "from": "c5",
+        "to": "d6"
+    },
+    {
+        "from": "a1",
+        "to": "c1"
+    },
+    {
+        "from": "h7",
+        "to": "h6"
+    },
+    {
+        "from": "c4",
+        "to": "a6"
+    },
+    {
+        "from": "c8",
+        "to": "c1"
+    },
+    {
+        "from": "d1",
+        "to": "c1"
+    },
+    {
+        "from": "e7",
+        "to": "d7"
+    },
+    {
+        "from": "a6",
+        "to": "b5"
+    },
+    {
+        "from": "d7",
+        "to": "e7"
+    },
+    {
+        "from": "e3",
+        "to": "e4"
+    },
+    {
+        "from": "d5",
+        "to": "f4"
+    },
+    {
+        "from": "e2",
+        "to": "e3"
+    },
+    {
+        "from": "f4",
+        "to": "g6"
+    },
+    {
+        "from": "g2",
+        "to": "g3"
+    },
+    {
+        "from": "f8",
+        "to": "d8"
+    },
+    {
+        "from": "g1",
+        "to": "g2"
+    },
+    {
+        "from": "e6",
+        "to": "e5"
+    },
+    {
+        "from": "b5",
+        "to": "c6"
+    },
+    {
+        "from": "b7",
+        "to": "c6"
+    },
+    {
+        "from": "c1",
+        "to": "c6"
+    },
+    {
+        "from": "e7",
+        "to": "b7"
+    },
+    {
+        "from": "c6",
+        "to": "c2"
+    },
+    {
+        "from": "a7",
+        "to": "a5"
+    },
+    {
+        "from": "b4",
+        "to": "a5"
+    },
+    {
+        "from": "b6",
+        "to": "a5"
+    },
+    {
+        "from": "h2",
+        "to": "h4"
+    },
+    {
+        "from": "f7",
+        "to": "f6"
+    },
+    {
+        "from": "b2",
+        "to": "c1"
+    },
+    {
+        "from": "g6",
+        "to": "h8"
+    },
+    {
+        "from": "h4",
+        "to": "h5"
+    },
+    {
+        "from": "h8",
+        "to": "f7"
+    },
+    {
+        "from": "e3",
+        "to": "d3"
+    },
+    {
+        "from": "f6",
+        "to": "f5"
+    },
+    {
+        "from": "c2",
+        "to": "c4"
+    },
+    {
+        "from": "f5",
+        "to": "f4"
+    },
+    {
+        "from": "g3",
+        "to": "f4"
+    },
+    {
+        "from": "e5",
+        "to": "f4"
+    },
+    {
+        "from": "d3",
+        "to": "d5"
+    },
+    {
+        "from": "b7",
+        "to": "d5"
+    },
+    {
+        "from": "e4",
+        "to": "d5"
+    },
+    {
+        "from": "d6",
+        "to": "e7"
+    },
+    {
+        "from": "c4",
+        "to": "d4"
+    },
+    {
+        "from": "g8",
+        "to": "h7"
+    },
+    {
+        "from": "a3",
+        "to": "a4"
+    },
+    {
+        "from": "e7",
+        "to": "f6"
+    },
+    {
+        "from": "d4",
+        "to": "d1"
+    },
+    {
+        "from": "d8",
+        "to": "c8"
+    },
+    {
+        "from": "c1",
+        "to": "f4"
+    },
+    {
+        "from": "c8",
+        "to": "c4"
+    },
+    {
+        "from": "f4",
+        "to": "g3"
+    },
+    {
+        "from": "c4",
+        "to": "a4"
+    },
+    {
+        "from": "d5",
+        "to": "d6"
+    },
+    {
+        "from": "a4",
+        "to": "e4"
+    },
+    {
+        "from": "d1",
+        "to": "c1"
+    },
+    {
+        "from": "g7",
+        "to": "g6"
+    },
+    {
+        "from": "c1",
+        "to": "c7"
+    },
+    {
+        "from": "h7",
+        "to": "g7"
+    },
+    {
+        "from": "f3",
+        "to": "d2"
+    },
+    {
+        "from": "e4",
+        "to": "e1"
+    },
+    {
+        "from": "h5",
+        "to": "g6"
+    },
+    {
+        "from": "g7",
+        "to": "g6"
+    },
+    {
+        "from": "d2",
+        "to": "c4"
+    },
+    {
+        "from": "h6",
+        "to": "h5"
+    },
+    {
+        "from": "c4",
+        "to": "a5"
+    },
+    {
+        "from": "h5",
+        "to": "h4"
+    },
+    {
+        "from": "g3",
+        "to": "h2"
+    },
+    {
+        "from": "e1",
+        "to": "d1"
+    },
+    {
+        "from": "a5",
+        "to": "c4"
+    },
+    {
+        "from": "d1",
+        "to": "d3"
+    },
+    {
+        "from": "c7",
+        "to": "c6"
+    },
+    {
+        "from": "h4",
+        "to": "h3"
+    },
+    {
+        "from": "g2",
+        "to": "f1"
+    },
+    {
+        "from": "f7",
+        "to": "d8"
+    },
+    {
+        "from": "c6",
+        "to": "b6"
+    },
+    {
+        "from": "d8",
+        "to": "f7"
+    },
+    {
+        "from": "h2",
+        "to": "g3"
+    },
+    {
+        "from": "d3",
+        "to": "d1"
+    },
+    {
+        "from": "f1",
+        "to": "e2"
+    },
+    {
+        "from": "d1",
+        "to": "d4"
+    },
+    {
+        "from": "c4",
+        "to": "e3"
+    },
+    {
+        "from": "f6",
+        "to": "e5"
+    },
+    {
+        "from": "d6",
+        "to": "d7"
+    },
+    {
+        "from": "g6",
+        "to": "h7"
+    },
+    {
+        "from": "g3",
+        "to": "e5"
+    },
+    {
+        "from": "f7",
+        "to": "e5"
+    },
+    {
+        "from": "e3",
+        "to": "f5"
+    },
+    {
+        "from": "d4",
+        "to": "d7"
+    },
+    {
+        "from": "b6",
+        "to": "h6"
+    },
+    {
+        "from": "h7",
+        "to": "g8"
+    },
+    {
+        "from": "h6",
+        "to": "h3"
+    },
+    {
+        "from": "d7",
+        "to": "a7"
+    },
+    {
+        "from": "h3",
+        "to": "g3"
+    },
+    {
+        "from": "g8",
+        "to": "f8"
+    },
+    {
+        "from": "e2",
+        "to": "e3"
+    },
+    {
+        "from": "a7",
+        "to": "a4"
+    },
+    {
+        "from": "f5",
+        "to": "d4"
+    },
+    {
+        "from": "f8",
+        "to": "f7"
+    },
+    {
+        "from": "g3",
+        "to": "g5"
+    },
+    {
+        "from": "a4",
+        "to": "a3"
+    },
+    {
+        "from": "e3",
+        "to": "e4"
+    },
+    {
+        "from": "e5",
+        "to": "d3"
+    },
+    {
+        "from": "g5",
+        "to": "f5"
+    },
+    {
+        "from": "f7",
+        "to": "g6"
+    },
+    {
+        "from": "f2",
+        "to": "f3"
+    },
+    {
+        "from": "d3",
+        "to": "f2"
+    },
+    {
+        "from": "e4",
+        "to": "f4"
+    },
+    {
+        "from": "f2",
+        "to": "d3"
+    },
+    {
+        "from": "f4",
+        "to": "e4"
+    },
+    {
+        "from": "d3",
+        "to": "f2"
+    },
+    {
+        "from": "e4",
+        "to": "f4"
+    },
+    {
+        "from": "f2",
+        "to": "d3"
+    },
+    {
+        "from": "f4",
+        "to": "e4"
+    },
+    {
+        "from": "d3",
+        "to": "f2"
+    },
+    {
+        "from": "e4",
+        "to": "f4"
+    },
+    {
+        "from": "f2",
+        "to": "d3"
+    },
+    {
+        "from": "f4",
+        "to": "e4"
+    },
+    {
+        "from": "d3",
+        "to": "f2"
+    },
+    {
+        "from": "e4",
+        "to": "f4"
+    },
+    {
+        "from": "f2",
+        "to": "d3"
+    },
+    {
+        "from": "f4",
+        "to": "e4"
+    }
+]
+/*
 let moveList = [
     {
         "from": "g1",
@@ -418,7 +1032,7 @@ let moveList = [
         "from": "f6",
         "to": "d4"
     }
-]
+]*/
 
 class ChessBoard extends React.Component {
     constructor(props) {
