@@ -13,7 +13,7 @@ import { ChessBoard } from "./ChessBoard";
 class App extends React.Component {
     constructor(props){
         super(props)
-        let simul = new Simulation(1500, 1500)
+        let simul = new Simulation(10000, 10000)
         simul.randomAsteroids()
         this.state = {
             simul: simul,

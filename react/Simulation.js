@@ -54,7 +54,7 @@ class Asteroid {
 
 const MAXVELOCITY = 5
 const AVGSLOPE = 10
-const PROBNEWASTEROID = 0.1
+const PROBNEWASTEROID = 0.3
 const MAXRADIUS = 15
 
 class Simulation {

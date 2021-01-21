@@ -37,22 +37,25 @@ function Overview(props) {
         width: "100%"
     }}>
         <div style={{
-            display: "flex",
-            flexDirection: "column"
+            display: "flex"
         }}>
             <div style={{ display: "flex" }}>
-                <img style={imgStyle} src="img/binary-file.png" />
-                <img style={imgStyle} src="img/Icon_Function.png" />
+                <a href="./docs/Resume.pdf" style={{ textDecoration: "none", color: "#007bff" }}>
+                    <img style={imgStyle} src="img/resumeIcon.png" />
+                </a>
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <img style={imgStyle} src="img/dnn-28vmlum.png" />
+                <img style={imgStyle} src="img/hamlineIcon.png" />
             </div>
         </div>
-        <p style={textStyle}>I am a recent graduate of Hamline Univetsity (November 2020),
+        <p style={textStyle}>
+        I am a recent graduate of Hamline University (November 2020),
         with a Computer Science Major and Mathematics Minor. I am knowledgeable
         of important computer science topics, including Artificial
         Intelligence methods such as deep neural networks. I also have experience in
-                        multiple programming languages and frameworks.</p>
+        multiple programming languages and frameworks. Click on the resume icon to the
+        right to see my resume.
+        </p>
     </div>
 
 }

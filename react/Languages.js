@@ -39,24 +39,26 @@ const languages1 = [
     { name: "Java", val: 0.9 },
     { name: "Python", val: 0.8 },
     { name: "JavaScript", val: 0.8 },
-    { name: "SQL", val: 0.7 },
-    { name: "PHP", val: 0.7 },
-    { name: "C++", val: 0.5 },
+    { name: "SQL", val: 0.8 },
+    { name: "C++", val: 0.6 },
     { name: "Golang", val: 0.5 },
     { name: "C", val: 0.5 },
     { name: "C#", val: 0.5 },
-    { name: "Bash", val: 0.5 },
+    { name: "Bash", val: 0.4 },
+    { name: "PHP", val: 0.4 },
     { name: "Ruby", val: 0.3 }
 ]
 
 const languages2 = [
-    { name: "React", val: 0.9 },
-    { name: "Flask", val: 0.8 },
-    { name: "Express", val: 0.7 },
+    { name: "React", val: 0.8 },
+    { name: "Spring Boot", val: 0.6 },
     { name: "Apache Tomcat", val: 0.6 },
+    { name: "Flask", val: 0.5 },
+    { name: "Express", val: 0.5 },
+    { name: "Nginx", val: 0.4 },
     { name: "Apache2 Server", val: 0.4 },
-    { name: "ASP.NET", val: 0.3 },
-    { name: "Spring Boot", val: 0.3 },
+    { name: "ASP.NET Core", val: 0.3 },
+    { name: "Hibernate/JPA", val: 0.3 },
 ]
 
 function Languages(props) {

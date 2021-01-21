@@ -7,6 +7,7 @@ import { Overview } from './Overview'
 import { ProjectShowcase } from './ProjectShowcase'
 import { Welcome } from './Welcome'
 import {Buttons} from './Buttons'
+import { OtherProjects } from './OtherProjects'
 
 let style = {
     flexColumn: {
@@ -74,6 +75,7 @@ class HomePage extends React.Component {
             { name: "Overview", ref: React.createRef() },
             { name: "Languages", ref: React.createRef() },
             { name: "Project showcase", ref: React.createRef() },
+            { name: "Other projects", ref: React.createRef() },
             { name: "Contact", ref: React.createRef() },
         ]
         //Store which of the above contentPanes the user is browsed to
@@ -172,6 +174,10 @@ class HomePage extends React.Component {
                     <ProjectShowcase size={size} />
                 </div>
                 <div style={style.contentDiv} ref={this.contentPanes[4].ref} >
+                    <OtherProjects />
+                </div>
+                <div style={ Object.assign({}, style.contentDiv, style.contentDivLighter)} 
+                    ref={this.contentPanes[5].ref} >
                     <Contact size={size} />
                 </div>
             </div>
