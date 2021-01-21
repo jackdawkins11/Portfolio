@@ -11,7 +11,7 @@ function OtherProjects(props){
             </li>
             <li>
                 <a href="/bank/index.html" style={{color: "#007bff", textDecoration: "none"}} >Bank website</a>
-                <p>Login as "employee" with password "dewjdjewfn". View users and accounts and create new accounts.</p>
+                <p>Login as "administrator" with password ";_a(*7&yxhER3=f". View and create users and accounts.</p>
             </li>
         </ul>
     </div>
