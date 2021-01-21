@@ -51,10 +51,10 @@ function Contact(props) {
             <h3 style={h3Style} > Social media </h3>
             <div>
                 <a href="https://github.com/jackdawkins11">
-                    <img className="iconButton" style={{ width: "50px" }} src="img/linkedin.png" />
+                    <img className="iconButton" style={{ width: "50px" }} src="img/github.png" />
                 </a>
                 <a href="https://www.linkedin.com/in/john-dawkins-0b798b19a/">
-                    <img className="iconButton" style={{ width: "50px" }} src="img/github.png" />
+                    <img className="iconButton" style={{ width: "50px" }} src="img/linkedin.png" />
                 </a>
             </div>
         </div>

@@ -54,7 +54,7 @@ function Overview(props) {
         of important computer science topics, including Artificial
         Intelligence methods such as deep neural networks. I also have experience in
         multiple programming languages and frameworks. Click on the resume icon to the
-        right to see my resume.
+        left to see my resume.
         </p>
     </div>
 
