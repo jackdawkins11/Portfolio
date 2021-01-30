@@ -22,6 +22,10 @@ let sizes = {
     }
 }
 
+let logoStyle={
+    width: "100px"
+}
+
 function ProjectShowcase(props) {
 
     let pStyle = { width: sizes[ props.size ].pWidth, fontSize: sizes[props.size].pFontSize }
@@ -43,6 +47,11 @@ function ProjectShowcase(props) {
                         <a style={{ textDecoration: "none", color: "#007bff" }} href="https://github.com/jackdawkins11/pytorch-alpha-zero"> here</a>.
                         To the right is a game it played against itself.
                         </p>
+            <div style={{display: "flex", alignItems: "center"}}>
+                <img style={logoStyle} src="./img/python-logo.png"></img>
+                <img style={logoStyle} src="./img/pytorch-logo.png"></img>
+                <img style={logoStyle} src="./img/nvidia-cuda-logo.jpg"></img>
+            </div>
         </div>
         <ChessBoard width={chessWidth} height={chessWidth} />
     </div>

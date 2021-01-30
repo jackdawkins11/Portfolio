@@ -37,15 +37,21 @@ function Overview(props) {
         width: "100%"
     }}>
         <div style={{
-            display: "flex"
+            display: "flex", flexDirection: "column"
         }}>
-            <div style={{ display: "flex" }}>
-                <a href="./docs/Resume.pdf" style={{ textDecoration: "none", color: "#007bff" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <a href="./docs/Resume.pdf" >
                     <img style={imgStyle} src="img/resumeIcon.png" />
                 </a>
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                <img style={imgStyle} src="img/hamlineIcon.png" />
+            <div style={{ display: "flex", alignItems: "center"}}>
+                <a href="https://www.hamline.edu" >
+                    <img style={imgStyle} src="img/hamlineIcon.png" />
+                </a>
+                <a href="https://education.oracle.com/oracle-certified-foundations-associate-java/trackp_372" >
+                    <img style={ Object.assign({}, imgStyle, {height: "83px", width: "200px"} )}
+                    src="img/o-certified-junior-associate-clr.gif" />
+                </a>
             </div>
         </div>
         <p style={textStyle}>

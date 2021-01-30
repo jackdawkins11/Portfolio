@@ -1,6 +1,9 @@
 
 import React from 'react'
 
+//Renders a horizontal bar graph
+//Requires a list of names and percentages as input
+//as well as whether to expand the bar graphs or not
 function Table(props) {
     let body = props.body.map((val, i) => {
         let percent = val.val * 100
