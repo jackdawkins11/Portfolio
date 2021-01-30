@@ -50,26 +50,28 @@ const languages1 = [
     { name: "Bash", val: 0.4 },
     { name: "PHP", val: 0.4 },
     { name: "Ruby", val: 0.3 }
-]
+].sort( (a,b) => b.val - a.val )
 
 const languages2 = [
     { name: "React", val: 0.8 },
     { name: "Spring Boot", val: 0.6 },
     { name: "Apache Tomcat", val: 0.6 },
+    { name: "Pytorch", val: 0.6 },
     { name: "Flask", val: 0.5 },
     { name: "Express", val: 0.5 },
     { name: "Nginx", val: 0.4 },
     { name: "Apache2 Server", val: 0.4 },
+    { name: "Tensorflow", val: 0.5 },
     { name: "ASP.NET Core", val: 0.3 },
     { name: "Hibernate/JPA", val: 0.3 },
-]
+].sort( (a,b) => b.val - a.val )
 
 function Languages(props) {
 
     return <div style={{ display: "flex" }}>
         <Table caption="Programming languages"
             expand={props.displayGraphs} body={languages1} />
-        <Table caption="Frameworks and servers"
+        <Table caption="Frameworks, servers and other tools"
             expand={props.displayGraphs} body={languages2} />
     </div>
 }

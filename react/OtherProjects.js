@@ -68,6 +68,9 @@ function OtherProjects(props) {
                     return <div style={  Object.assign({}, listItemStyle, {backgroundColor: backgroundColor}) }
                         onMouseEnter={() => {setIdx(cIdx)}}
                         onMouseLeave={() => {setIdx(-1)}}
+                        onClick={() => {
+                            window.location = data.link
+                        }}
                     >
                         <img style={screenShotStyle} src={data.img}></img>
                         <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }} >
