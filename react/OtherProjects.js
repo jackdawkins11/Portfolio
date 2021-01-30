@@ -20,7 +20,18 @@ let listData = [
             The backend was written 5 different times in: Tomcat + Java EE + MySQL;
         NodeJS + Express + MongoDB;
         Python + Flask + MySQL; Golang + MySQL; PHP + Apache2 + MySQL.
-        All implementations can be found on my github.`
+        All implementations can be found on my github.`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/java-logo.png",
+            "./img/tomcat-logo.png",
+            "./img/golang-logo.png",
+            "./img/node-logo.png",
+            "./img/python-logo.png",
+            "./img/php-logo.png",
+            "./img/mysql-logo.png",
+            "./img/postgres-logo.png"
+        ]
     },
     {
         link: "/bank/index.html",
@@ -28,7 +39,14 @@ let listData = [
         img: "./img/bank-api-screenshot.png",
         description: "Login as \"administrator\" with password \";_a(*7&yxhER3=f\". View and create users and accounts.",
         description2: `The frontend was written in React. The backend uses Java Servlets with Tomcat 9,
-        JDBC and PostgreSQL. Extensive testing with JUnit was done.`
+        JDBC and PostgreSQL. Extensive testing with JUnit was done.`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/java-logo.png",
+            "./img/tomcat-logo.png",
+            "./img/postgres-logo.png",
+            "./img/junit-logo.png"
+        ]
     }
 ]
 
@@ -55,8 +73,12 @@ function OtherProjects(props) {
                         <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }} >
                             <h3> {data.name} </h3>
                             <p> {data.description} </p>
-                            <p> {data.description2} </p>
                         </div>
+                        <div style={{display: "flex", flexWrap: "wrap"}}>{
+                            data.tools.map( tool =>
+                            <img src={tool} style={{height: "50px"}}></img>
+                        )
+                        }</div>
                     </div>
                 })
             }  
