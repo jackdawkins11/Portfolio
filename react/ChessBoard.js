@@ -619,20 +619,29 @@ let moveList = [
     }
 ]
 
+//Renders the chess board with a panel for changing the moves
 class ChessBoard extends React.Component {
+
     constructor(props) {
         super(props)
+        //Whether to make a move every second
         this.playMode = true
+        //Current index in the above move list
         this.moveIdx = 0
+        //Stores the state of the board to display
         this.state = {
-            chess: new Chess()
+            chess: new Chess(),
+            lastMove: null
         }
+        //We need access to the dom node that is rendered
         this.chessWrapperRef = React.createRef()
     }
 
+    //Change state to the next move in the move list or the first move
     makeMoveOrReset() {
         let chess = this.state.chess
         if (this.moveIdx == moveList.length) {
+            //Set state for the starting position
             this.setState({
                 chess: new Chess(),
                 lastMove: null
@@ -640,8 +649,10 @@ class ChessBoard extends React.Component {
             this.moveIdx = 0
             return
         }
+        //Make the move
         let move = moveList[this.moveIdx]
         chess.move(move)
+        //Set state
         this.setState({
             chess: chess,
             lastMove: [move.from, move.to]
@@ -652,9 +663,12 @@ class ChessBoard extends React.Component {
     popMove() {
         let chess = this.state.chess
         if (this.moveIdx == 0) {
+            //Don't do anything if this is the first move
             return
         }
+        //Go to the previous position
         chess.undo()
+        //Set state
         this.setState({
             chess: chess,
             lastMove: null
@@ -682,34 +696,37 @@ class ChessBoard extends React.Component {
     }
 
     chessWrapperClick(e) {
-        console.log("Clicked")
+        //Focus on the wrapper so we can get on key down events
         this.chessWrapperRef.current.focus()
     }
 
     togglePaused() {
+        //Change the play mode
         this.playMode = !this.playMode
+        //If we changed from paused to play, start the play loop
         if (this.playMode) {
             this.tick()
         }
     }
 
     tick() {
+        //If not play mode, end this infinite loop
         if (!this.playMode) {
             return
         }
+        //Make a move
         this.makeMoveOrReset()
+        //Continue in loop
         setTimeout(this.tick.bind(this), 1000)
     }
 
     componentDidMount() {
+        //Start the play loop once when it is first rendered
         this.tick()
     }
 
-    getFen() {
-        let fen = this.state.chess.fen()
-        return fen
-    }
     render() {
+        //The play/pause icon
         let toggleIconUrl = null
         if (this.playMode) {
             toggleIconUrl = "img/pause.png"
@@ -721,7 +738,7 @@ class ChessBoard extends React.Component {
             ref={this.chessWrapperRef}
             className="chessgroundWrapper">
             <Chessground
-                fen={this.getFen()}
+                fen={this.state.chess.fen()}
                 lastMove={this.state.lastMove}
                 width={this.props.width}
                 height={this.props.height}
