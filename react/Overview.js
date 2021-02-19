@@ -48,9 +48,9 @@ function Overview(props) {
                 <a href="https://www.hamline.edu" >
                     <img style={imgStyle} src="img/hamlineIcon.png" />
                 </a>
-                <a href="https://education.oracle.com/oracle-certified-foundations-associate-java/trackp_372" >
-                    <img style={ Object.assign({}, imgStyle, {height: "83px", width: "200px"} )}
-                    src="img/o-certified-junior-associate-clr.gif" />
+                <a href="https://education.oracle.com/oracle-certified-associate-java-se-8-programmer/trackp_333" >
+                    <img style={ Object.assign({}, imgStyle, {height: "83px"} )}
+                    src="img/O_Java-SE-8-OCA-clr.gif" />
                 </a>
             </div>
         </div>
