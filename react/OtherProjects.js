@@ -12,40 +12,14 @@ let listItemStyle={
 
 let listData = [
     {
-        link: "/calculator/index.html",
-        name: "Calculator website",
-        img: "./img/calculator-screenshot.png",
-        description: "Create a new account and then login to use the calculator.",
-        description2: `The frontend was written once with React.
-            The backend was written 5 different times in: Tomcat + Java EE + MySQL;
-        NodeJS + Express + MongoDB;
-        Python + Flask + MySQL; Golang + MySQL; PHP + Apache2 + MySQL.
-        All implementations can be found on my github.`,
-        tools: [
-            "./img/react-logo.png",
-            "./img/java-logo.png",
-            "./img/tomcat-logo.png",
-            "./img/golang-logo.png",
-            "./img/node-logo.png",
-            "./img/python-logo.png",
-            "./img/php-logo.png",
-            "./img/mysql-logo.png",
-            "./img/postgres-logo.png"
-        ]
-    },
-    {
-        link: "/bank/index.html",
-        name: "Bank website",
+        link: "/many-to-many-demo",
+        name: "Database demo",
         img: "./img/bank-api-screenshot.png",
-        description: "Login as \"administrator\" with password \";_a(*7&yxhER3=f\". View and create users and accounts.",
-        description2: `The frontend was written in React. The backend uses Java Servlets with Tomcat 9,
-        JDBC and PostgreSQL. Extensive testing with JUnit was done.`,
+        description: "changedAdd and delete items and relationships in a mnay-to-many database.",
+        description2: `The frontend was written in React. The backend uses Spring-boot`,
         tools: [
             "./img/react-logo.png",
             "./img/java-logo.png",
-            "./img/tomcat-logo.png",
-            "./img/postgres-logo.png",
-            "./img/junit-logo.png"
         ]
     }
 ]
