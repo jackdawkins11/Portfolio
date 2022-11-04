@@ -14,7 +14,7 @@ let listData = [
     {
         link: "/many-to-many-demo",
         name: "Database demo",
-        img: "./img/bank-api-screenshot.png",
+        img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png,
         description: "changedAdd and delete items and relationships in a mnay-to-many database.",
         description2: `The frontend was written in React. The backend uses Spring-boot`,
         tools: [
