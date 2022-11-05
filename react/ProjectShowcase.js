@@ -53,7 +53,7 @@ function ProjectShowcase(props) {
                 <img style={logoStyle} src="./img/nvidia-cuda-logo.jpg"></img>
             </div>
         </div>
-        <ChessBoard width={chessWidth} height={chessWidth} />
+        <img src="./img/image.jpeg"></img>
     </div>
 }
 
