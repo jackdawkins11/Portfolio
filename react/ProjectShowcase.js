@@ -1,5 +1,4 @@
 import React from 'react'
-import { ChessBoard } from './ChessBoard'
 
 let sizes = {
     BIG: {
@@ -44,9 +43,8 @@ function ProjectShowcase(props) {
             neural network in conjunction with Monte Carlo Tree Search
             to create a chess program that could play as good as top
             humans. Check out the details
-                        <a style={{ textDecoration: "none", color: "#007bff" }} href="https://github.com/jackdawkins11/pytorch-alpha-zero"> here</a>.
-                        To the right is a game it played against itself.
-                        </p>
+                  <a style={{ textDecoration: "none", color: "#007bff" }} href="https://github.com/jackdawkins11/pytorch-alpha-zero"> here</a>.
+            </p>
             <div style={{display: "flex", alignItems: "center"}}>
                 <img style={logoStyle} src="./img/python-logo.png"></img>
                 <img style={logoStyle} src="./img/pytorch-logo.png"></img>
@@ -54,7 +52,7 @@ function ProjectShowcase(props) {
             </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <img style={{width: chessWeidth}} src="./img/image.jpeg"></img>
+            <img style={{width: chessWidth}} src="./img/image.jpeg"></img>
         </div>
     </div>
 }
