@@ -53,7 +53,7 @@ function ProjectShowcase(props) {
                 <img style={logoStyle} src="./img/nvidia-cuda-logo.jpg"></img>
             </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: chessWidth }}>
             <img src="./img/image.jpeg"></img>
         </div>
     </div>
