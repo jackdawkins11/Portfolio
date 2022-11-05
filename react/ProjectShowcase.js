@@ -54,7 +54,7 @@ function ProjectShowcase(props) {
             </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <img style={width: chessWeidth} src="./img/image.jpeg"></img>
+            <img style={{width: chessWeidth}} src="./img/image.jpeg"></img>
         </div>
     </div>
 }
