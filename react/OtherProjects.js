@@ -12,7 +12,7 @@ let listItemStyle={
 
 let listData = [
     {
-	link: "ec2-3-86-192-14.compute-1.amazonaws.com:8080",
+	    link: "http://ec2-3-86-192-14.compute-1.amazonaws.com:8080",
         name: "Database demo",
         img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
         description: "Add and delete items and relationships in a mnay-to-many database.",
