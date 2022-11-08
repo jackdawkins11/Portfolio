@@ -12,10 +12,10 @@ let listItemStyle={
 
 let listData = [
     {
-        link: "/many-to-many-demo",
+	link: "ec2-3-86-192-14.compute-1.amazonaws.com:8080",
         name: "Database demo",
         img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
-        description: "changedAdd and delete items and relationships in a mnay-to-many database.",
+        description: "Add and delete items and relationships in a mnay-to-many database.",
         description2: `The frontend was written in React. The backend uses Spring-boot`,
         tools: [
             "./img/react-logo.png",
