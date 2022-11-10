@@ -25,7 +25,7 @@ let listData = [
     {
 	    link: "http://ec2-54-234-238-21.compute-1.amazonaws.com:8080/",
         name: "Calculator app",
-        img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
+        img: "./img/calculator-screenshot.png",
         description: "Login and then use the calculator.",
         description2: `The frontend was written in React. The backend uses Spring-boot`,
         tools: [
