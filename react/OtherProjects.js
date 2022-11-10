@@ -12,10 +12,21 @@ let listItemStyle={
 
 let listData = [
     {
-	    link: "http://ec2-3-86-192-14.compute-1.amazonaws.com:8080",
+	    link: "http://ec2-3-89-31-3.compute-1.amazonaws.com:8080/",
         name: "Database demo",
         img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
         description: "Add and delete items and relationships in a mnay-to-many database.",
+        description2: `The frontend was written in React. The backend uses Spring-boot`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/java-logo.png",
+        ]
+    },
+    {
+	    link: "http://ec2-54-234-238-21.compute-1.amazonaws.com:8080/",
+        name: "Calculator app",
+        img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
+        description: "Login and then use the calculator.",
         description2: `The frontend was written in React. The backend uses Spring-boot`,
         tools: [
             "./img/react-logo.png",
