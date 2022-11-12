@@ -37,7 +37,7 @@ let listData = [
 	    link: "http://ec2-54-242-88-239.compute-1.amazonaws.com:8080/BankAPI/",
         name: "Bank API",
         img: "./img/bank-api-screenshot.png",
-        description: "Login and then create users and accounts with 3 roles: Admin, Employee, Standard.",
+        description: "Login using 'administrator' and ';_a(*7&yxhER3=f' and then create users and accounts with 3 roles: Admin, Employee, Standard.",
         description2: `The frontend was written in React. The backend uses Java EE`,
         tools: [
             "./img/react-logo.png",
