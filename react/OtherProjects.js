@@ -43,6 +43,28 @@ let listData = [
             "./img/react-logo.png",
             "./img/java-logo.png",
         ]
+    },
+    {
+	    link: "http://ec2-54-157-210-122.compute-1.amazonaws.com:8080",
+        name: "Text server",
+        img: "./img/text-server-screenshot.png",
+        description: "Add messages to the server",
+        description2: `The frontend was written in React. The backend uses spring-boot`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/java-logo.png",
+        ]
+    },
+    {
+	    link: "http://ec2-44-202-50-165.compute-1.amazonaws.com:8080/",
+        name: "Bank API",
+        img: "./img/image-caption-screenshot.png",
+        description: "Add messages and images to the server",
+        description2: `The frontend was written in React. The backend uses spring boot`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/java-logo.png",
+        ]
     }
 ]
 

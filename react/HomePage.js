@@ -173,7 +173,7 @@ class HomePage extends React.Component {
                 <div style={contentDivLighter} ref={this.contentPanes[3].ref} >
                     <ProjectShowcase size={size} />
                 </div>
-                <div style={style.contentDiv} ref={this.contentPanes[4].ref} >
+                <div style={Object.assign({}, style.contentDiv, {height: "auto"})} ref={this.contentPanes[4].ref} >
                     <OtherProjects />
                 </div>
                 <div style={ Object.assign({}, style.contentDiv, style.contentDivLighter)} 
