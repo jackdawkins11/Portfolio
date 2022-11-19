@@ -12,6 +12,17 @@ let listItemStyle={
 
 let listData = [
     {
+	    link: "http://ec2-18-233-98-91.compute-1.amazonaws.com:5000/index.html",
+        name: "Chess AI",
+        img: "./img/image.jpeg",
+        description: "Play against my chess AI! Hopefully it's not handling too many requests.",
+        description2: `Details above`,
+        tools: [
+            "./img/react-logo.png",
+            "./img/pytorch-logo.png",
+        ]
+    },
+    {
 	    link: "http://ec2-3-89-31-3.compute-1.amazonaws.com:8080/",
         name: "Database demo",
         img: "./img/Screen Shot 2022-11-04 at 7.42.04 AM.png",
