@@ -12,7 +12,7 @@ let listItemStyle={
 
 let listData = [
     {
-	    link: "http://ec2-18-233-98-91.compute-1.amazonaws.com:5000/index.html",
+	    link: "http://ec2-54-175-18-115.compute-1.amazonaws.com/index.html",
         name: "Chess AI",
         img: "./img/image.jpeg",
         description: "Play against my chess AI! Hopefully it's not handling too many requests.",
